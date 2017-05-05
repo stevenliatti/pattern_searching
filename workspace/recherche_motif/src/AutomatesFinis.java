@@ -15,27 +15,46 @@ public class AutomatesFinis {
 	}
 
 	public void printArray() {
+		Character letter;
 		System.out.print("\t");
 		for (int i = 0; i < alphabet.length(); i++) {
-			System.out.print(alphabet.charAt(i) + "\t");
+			letter = alphabet.charAt(i);
+			if (pattern.contains(letter.toString())) {
+				System.out.print(alphabet.charAt(i) + "\t");
+			}
 		}
 		System.out.println();
 		for (int i = 0; i < array.length; i++) {
 			System.out.print(i + ":\t");
 			for (int j = 0; j < array[0].length; j++) {
-				System.out.print(array[i][j] + "\t");
+				letter = alphabet.charAt(j);
+				if (pattern.contains(letter.toString())) {
+					System.out.print(array[i][j] + "\t");
+				}
 			}
 			System.out.println();
 		}
 	}
 
+	public void algo() {
+		int occurences = 0;
+		StringBuilder positionsBuilder = new StringBuilder();
+		int q = 0;
+		for (int i = 0; i < text.length(); i++) {
+			int t = alphabet.indexOf(text.charAt(i));
+			q = array[q][t];
+			if (q == pattern.length()) {
+				occurences++;
+				positionsBuilder.append(i - pattern.length() + 2 + " ");
+			}
+		}
+		System.out.println(occurences + "\n" + positionsBuilder.toString());
+	}
+
 	private void buildAlphabet() {
 		Set<Character> alphabetSet = new TreeSet<>();
 		for (int i = 0; i < text.length(); i++) {
-			Character letter = text.charAt(i);
-			if (pattern.contains(letter.toString())) {
-				alphabetSet.add(letter);
-			}
+			alphabetSet.add(text.charAt(i));
 		}
 		StringBuilder alphabetBuilder = new StringBuilder(alphabetSet.size());
 		for (Character c : alphabetSet) { alphabetBuilder.append(c); }

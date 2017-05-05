@@ -3,10 +3,13 @@ import java.io.*;
 public class Main {
 
     public static void main(String[] args) throws IOException, NumberFormatException {
-//        String text = "212121212131212 wwwwww bwwwawwww bonsbonsbonsbonsbonsabonsbonsbons " +
-//                "1111abt1111ab1111abt1111ab111 12121111abt1111ab1212 " +
-//                "12w wwwab12 w1111abww1111abwww1111abt1111abwwww bonswbonsbonswbonsbons" +
-//                "bons 12ww1212www121212wwww";
+        String text = "212121212131212 wwwwww bwwwawwww bonsbonsbonsbonsbonsabonsbonsbons " +
+                "1111abt1111ab1111abt1111ab111 12121111abt1111ab1212 " +
+                "12w wwwab12 w1111abww1111abwww1111abt1111abwwww bonswbonsbonswbonsbons" +
+                "bons 12ww1212www121212wwww";
+	    AutomatesFinis robot = new AutomatesFinis(text, "1111abt1111ab");
+	    robot.printArray();
+	    robot.algo();
 //        new RabinKarp(text, "1111abt1111ab");
 
         // Ne pas modifier cette partie
@@ -48,23 +51,29 @@ public class Main {
                 break;
             case 2: //Automate fini
                 // Format de sortie -> à générer avec votre code
+	            AutomatesFinis automate;
                 if (fileName == null) {
+                	automate = new AutomatesFinis(motif, motif);
+                	automate.printArray();
                     // Afficher le tableau de la fonction de transition
                     // P. ex. pour le motif M = "ababaca"
                     //                  a b c
-                    System.out.println("1 0 0"); // etat 0
-                    System.out.println("1 2 0"); // etat 1
-                    System.out.println("3 0 0"); // etat 2
-                    System.out.println("1 4 0"); // etat 3
-                    System.out.println("5 0 0"); // etat 4
-                    System.out.println("1 4 6"); // etat 5
-                    System.out.println("7 0 0"); // etat 6
-                    System.out.println("1 2 0"); // etat 7
+//                    System.out.println("1 0 0"); // etat 0
+//                    System.out.println("1 2 0"); // etat 1
+//                    System.out.println("3 0 0"); // etat 2
+//                    System.out.println("1 4 0"); // etat 3
+//                    System.out.println("5 0 0"); // etat 4
+//                    System.out.println("1 4 6"); // etat 5
+//                    System.out.println("7 0 0"); // etat 6
+//                    System.out.println("1 2 0"); // etat 7
+
                 } else {
                     // Afficher le nombre d'occurences du motif
                     // suivi de la liste des positions de sa 1ere lettre dans le texte
-                    System.out.println("13"); // nombre d'occurences du motifs
-                    System.out.println("0 3 46 67 109"); //liste des positions du motif
+	                automate = new AutomatesFinis(fileName, motif);
+	                automate.algo();
+//                    System.out.println("13"); // nombre d'occurences du motifs
+//                    System.out.println("0 3 46 67 109"); //liste des positions du motif
                 }
                 break;
             case 3: //Knut-Morris-Pratt
