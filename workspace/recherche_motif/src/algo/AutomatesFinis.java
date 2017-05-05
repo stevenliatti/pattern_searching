@@ -1,8 +1,7 @@
 package algo;
 
-
-import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class AutomatesFinis {
 	private String text;
@@ -18,23 +17,28 @@ public class AutomatesFinis {
 	}
 
 	public void printArray() {
-		System.out.print("   ");
+		System.out.print("\t");
 		for (int i = 0; i < alphabet.length(); i++) {
-			System.out.print(alphabet.charAt(i) + " ");
+			System.out.print(alphabet.charAt(i) + "\t");
 		}
 		System.out.println();
 		for (int i = 0; i < array.length; i++) {
-			System.out.print(i + ": ");
+			System.out.print(i + ":\t");
 			for (int j = 0; j < array[0].length; j++) {
-				System.out.print(array[i][j] + " ");
+				System.out.print(array[i][j] + "\t");
 			}
 			System.out.println();
 		}
 	}
 
 	private void buildAlphabet() {
-		Set<Character> alphabetSet = new LinkedHashSet<>();
-		for (int i = 0; i < text.length(); i++) { alphabetSet.add(text.charAt(i)); }
+		Set<Character> alphabetSet = new TreeSet<>();
+		for (int i = 0; i < text.length(); i++) {
+			Character letter = text.charAt(i);
+			if (pattern.contains(letter.toString())) {
+				alphabetSet.add(letter);
+			}
+		}
 		StringBuilder alphabetBuilder = new StringBuilder(alphabetSet.size());
 		for (Character c : alphabetSet) { alphabetBuilder.append(c); }
 		alphabet = alphabetBuilder.toString();
