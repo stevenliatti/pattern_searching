@@ -1,13 +1,13 @@
 import java.util.Set;
 import java.util.TreeSet;
 
-public class AutomatesFinis {
+public class Automata {
 	private String text;
 	private String pattern;
 	private String alphabet;
 	private int array[][];
 
-	public AutomatesFinis(String text, String pattern) {
+	public Automata(String text, String pattern) {
 		this.text = text;
 		this.pattern = pattern;
 		buildAlphabet();
@@ -36,7 +36,7 @@ public class AutomatesFinis {
 		}
 	}
 
-	public void algo() {
+	public void findPattern() {
 		int occurences = 0;
 		StringBuilder positionsBuilder = new StringBuilder();
 		int q = 0;

@@ -12,7 +12,7 @@ class RabinKarp {
     private String M;
     private int m;
 
-    RabinKarp(String T, String M) {
+    public RabinKarp(String T, String M) {
         buildDictionnary();
         this.T = T;
         this.M = M;
@@ -22,11 +22,11 @@ class RabinKarp {
         p = hash(M, 0, m);
     }
 
-    void RabinKrapNoFile() {
+    public void RabinKarpNoFile() {
         System.out.println(B + " " + q + " " + p);
     }
 
-    void RabinKarpAlgorithm() {
+    public void RabinKarpAlgorithm() {
         int t = T.length();
         int occurences = 0;
         String positions = "";
