@@ -1,3 +1,5 @@
+package algorithms;
+
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -15,8 +17,8 @@ public class Automata extends FindPattern {
 	/**
 	 * Construit un automate en fonction d'un texte et d'un motif.
 	 *
-	 * @param text
-	 * @param pattern
+	 * @param text Le texte dans lequel le motif sera cherché.
+	 * @param pattern Le motif.
 	 */
 	public Automata(String text, String pattern) {
 	    super(text, pattern);
@@ -24,11 +26,8 @@ public class Automata extends FindPattern {
 		buildRobot();
 	}
 
-	/**
-	 * Fonction qui imprime le tableau des états de l'automate en ligne
-	 * et en colonnes les symboles de l'alphabet présents dans le motif.
-	 */
-	public void printArray() {
+	@Override
+	public void output() {
 		Character letter;
 		System.out.print("\t");
 		for (int i = 0; i < alphabet.length(); i++) {
@@ -50,30 +49,17 @@ public class Automata extends FindPattern {
 		}
 	}
 
-    /**
-     * Fonction exécutant l'algorithme des automates finis, tel
-     * que vu en cours. Imprime le nombre d'occurences puis leur
-     * position dans le texte (sur une nouvelle ligne).
-     */
+    @Override
 	public void findPattern() {
-		int occurences = 0;
-		StringBuilder positionsBuilder = new StringBuilder();
 		int q = 0;
 		for (int i = 0; i < text.length(); i++) {
 			int t = alphabet.indexOf(text.charAt(i));
 			q = array[q][t];
 			if (q == pattern.length()) {
-				occurences++;
-				positionsBuilder.append(i - pattern.length() + 2 + " ");
+				occurences.add(i - pattern.length() + 2);
 			}
 		}
-		System.out.println(occurences + "\n" + positionsBuilder.toString());
 	}
-
-    @Override
-    public void output() {
-
-    }
 
     /**
      * Cette fonction construit l'alphabet présent dans le texte.

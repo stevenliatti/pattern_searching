@@ -1,3 +1,5 @@
+package algorithms;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,12 +38,12 @@ public abstract class FindPattern {
      */
     public abstract void output();
 
-    /**
-     * Retourne la liste des occurences.
-     *
-     * @return La liste des occurences.
-     */
-    public List<Integer> getOccurences() {
-        return occurences;
+    @Override
+    public String toString() {
+        String str = occurences.size() + "\n";
+        for (Integer i : occurences) {
+            str += i + " ";
+        }
+        return str;
     }
 }

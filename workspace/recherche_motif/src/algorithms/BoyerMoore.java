@@ -1,3 +1,5 @@
+package algorithms;
+
 import java.util.LinkedHashMap;
 
 /**
@@ -19,42 +21,17 @@ public class BoyerMoore extends FindPattern{
      * @param text le texte à explorer
      * @param pattern le motif recherché
      */
-    BoyerMoore(String text, String pattern) {
+    public BoyerMoore(String text, String pattern) {
         super(text, pattern);
         this.pattern = pattern;
         this.text = text;
         buildTab1();
         buildTab2();
     }
- 
-    void BoyerMooreAlgorithm() {
-        int m = pattern.length();
-        int t = text.length();
-        int s = m;
-        int occurences = 0;
-        String positions = "";
-        while (s <= t) {
-            int j = m;
-            while (j > 0 && text.charAt(s - m + j - 1) == pattern.charAt(j - 1)) {
-                j--;
-            }
-            if (j == 0) {
-                positions += String.valueOf(s - m + 1) + " ";
-                occurences++;
-            }
-            if (j == m) {
-                if (tab1.containsKey(String.valueOf(text.charAt(s - 1)))) {
-                    s += tab1.get(String.valueOf(text.charAt(s - 1)));
-                } else
-                    s += tab1.get("autre");
-            } else {
-                s += tab2[m - j - 1];
-            }
-        }
-        System.out.println(occurences);
-        System.out.println(positions);
-    }
 
+    /**
+     * Contruction du premier tableau de BoyerMoore
+     */
     private void buildTab1() {
         int m = pattern.length();
         tab1 = new LinkedHashMap<>();
@@ -70,6 +47,9 @@ public class BoyerMoore extends FindPattern{
         tab1.put("autre", pattern.length());
     }
 
+    /**
+     * Contruction du premier tableau de BoyerMoore
+     */
     private void buildTab2() {
         int m = pattern.length();
         tab2 = new int[m];
@@ -109,7 +89,26 @@ public class BoyerMoore extends FindPattern{
 
     @Override
     public void findPattern() {
-
+        int m = pattern.length();
+        int t = text.length();
+        int s = m;
+        while (s <= t) {
+            int j = m;
+            while (j > 0 && text.charAt(s - m + j - 1) == pattern.charAt(j - 1)) {
+                j--;
+            }
+            if (j == 0) {
+                occurences.add(s - m + 1);
+            }
+            if (j == m) {
+                if (tab1.containsKey(String.valueOf(text.charAt(s - 1)))) {
+                    s += tab1.get(String.valueOf(text.charAt(s - 1)));
+                } else
+                    s += tab1.get("autre");
+            } else {
+                s += tab2[m - j - 1];
+            }
+        }
     }
 
     @Override

@@ -1,3 +1,5 @@
+package algorithms;
+
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Random;
@@ -21,7 +23,7 @@ public class RabinKarp extends FindPattern{
      * @param text le texte à explorer
      * @param pattern le motif recherché
      */
-    RabinKarp(String text, String pattern) {
+    public RabinKarp(String text, String pattern) {
         super(text, pattern);
         buildDictionnary();
         this.text = text;
