@@ -1,3 +1,11 @@
+package main;
+
+import algorithms.Automata;
+import algorithms.BoyerMoore;
+import algorithms.KMP;
+import algorithms.RabinKarp;
+import readers.TextFile;
+
 import java.io.*;
 
 public class Main {
@@ -13,13 +21,15 @@ public class Main {
 
         System.out.println("\nAutomate :");
 	    Automata robot = new Automata(text, pattern);
-	    robot.printArray();
+	    robot.output();
 	    robot.findPattern();
+        System.out.println(robot);
 
-	    System.out.println("\nKMP :");
+        System.out.println("\nKMP :");
 	    KMP kmpTest = new KMP(text, pattern);
-	    kmpTest.printArray();
+	    kmpTest.output();
         kmpTest.findPattern();
+        System.out.println(kmpTest);
 
         // Ne pas modifier cette partie
         String fileName = null;
@@ -33,7 +43,7 @@ public class Main {
                 motif = args[0];
                 break;
             default:
-                System.err.println("usage: java Main <motif> <findPattern> (<fichier_texte>)");
+                System.err.println("usage: java main.Main <motif> <findPattern> (<fichier_texte>)");
                 System.exit(1);
         }
 
@@ -63,7 +73,7 @@ public class Main {
 	            Automata automate;
                 if (fileName == null) {
                 	automate = new Automata(motif, motif);
-                	automate.printArray();
+                	automate.output();
                     // Afficher le tableau de la fonction de transition
                     // P. ex. pour le motif M = "ababaca"
                     //                  a b c
@@ -81,6 +91,7 @@ public class Main {
                     // suivi de la liste des positions de sa 1ere lettre dans le texte
 	                automate = new Automata(TextFile.fileToString(fileName), motif);
 	                automate.findPattern();
+                    System.out.println(automate);
 //                    System.out.println("13"); // nombre d'occurences du motifs
 //                    System.out.println("0 3 46 67 109"); //liste des positions du motif
                 }
@@ -94,8 +105,8 @@ public class Main {
                     //                  0 1 2 3 4 5 6           q
                     //                  a b a b a c a         M[q]
 //                    System.out.println("0 0 1 2 3 0 1");  // pi[q]
-	                kmp = new KMP(motif);
-	                kmp.printArray();
+	                kmp = new KMP(motif, motif);
+	                kmp.output();
                 } else {
                     // Afficher le nombre d'occurences du motif
                     // suivi de la liste des positions de sa 1ere lettre dans le texte
@@ -103,6 +114,7 @@ public class Main {
 //                    System.out.println("0 3 46 67 109"); //liste des positions du motif
 	                kmp = new KMP(TextFile.fileToString(fileName), motif);
 	                kmp.findPattern();
+                    System.out.println(kmp);
                 }
                 break;
             case 4: //Boyer-Moore
@@ -135,14 +147,3 @@ public class Main {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-

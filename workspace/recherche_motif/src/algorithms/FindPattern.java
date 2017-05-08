@@ -1,3 +1,5 @@
+package algorithms;
+
 import java.util.List;
 
 /**
@@ -12,7 +14,7 @@ public abstract class FindPattern {
     protected List<Integer> occurences;
 
     /**
-     * Construit un FindPattern à partir d'un texte et d'un motif.
+     * Construit un algorithms.FindPattern à partir d'un texte et d'un motif.
      *
      * @param text
      * @param pattern
@@ -41,5 +43,14 @@ public abstract class FindPattern {
      */
     public List<Integer> getOccurences() {
         return occurences;
+    }
+
+    @Override
+    public String toString() {
+        String str = occurences.size() + "\n";
+        for (Integer i : occurences) {
+            str += i + " ";
+        }
+        return str;
     }
 }
