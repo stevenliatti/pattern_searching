@@ -95,10 +95,4 @@ class RabinKarp {
         }
         return true;
     }
-
-    private void printDictionary() {
-        for (int i = 0; i < dictionnary.size(); i++) {
-            System.out.println(charArray[i] + " : " + dictionnary.get(charArray[i]));
-        }
-    }
 }
