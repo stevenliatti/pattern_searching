@@ -1,5 +1,3 @@
-package main;
-
 import algorithms.*;
 import readers.TextFile;
 
@@ -20,7 +18,7 @@ public class Main {
                 motif = args[0];
                 break;
             default:
-                System.err.println("usage: java main.Main <motif> <findPattern> (<fichier_texte>)");
+                System.err.println("usage: java Main <motif> <findPattern> (<fichier_texte>)");
                 System.exit(1);
         }
 
