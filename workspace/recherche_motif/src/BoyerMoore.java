@@ -1,5 +1,9 @@
 /**
- * Created by raed on 10.04.17.
+ * Classe implémentant l'algorithme de recherche de motifs
+ * selon Boyer-Moore.
+ *
+ * @author Raed Abdennadher
+ * @author Steven Liatti
  */
 public class BoyerMoore {
 }
