@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,6 +21,7 @@ public abstract class FindPattern {
     public FindPattern(String text, String pattern) {
         this.text = text;
         this.pattern = pattern;
+        this.occurences = new ArrayList<>();
     }
 
     /**
