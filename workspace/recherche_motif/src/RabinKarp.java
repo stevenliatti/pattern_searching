@@ -33,14 +33,16 @@ public class RabinKarp extends FindPattern{
     }
 
     /**
+     * Construire un grand entier qui représente le hash de la partie
+     * entre indice min et max de la chaine s
      *
-     * @param n
-     * @param min
-     * @param max
-     * @return
+     * @param string la chaine de caractère depuis laquelle le hash est calculé
+     * @param min l'indice min
+     * @param max l'indice max
+     * @return un entier grand qui représente le hash
      */
-    private BigInteger hash(String n, int min, int max) {
-        char[] mCharArray = n.toCharArray();
+    private BigInteger hash(String string, int min, int max) {
+        char[] mCharArray = string.toCharArray();
         String s = "";
         for (int i = min; i < max; i++) {
             s += dictionnary.get(mCharArray[i]);
@@ -49,8 +51,11 @@ public class RabinKarp extends FindPattern{
     }
 
     /**
+     * Calculer q premier en choisissant un nombre aléatoire inférieur
+     * à 100. Si ce dernier n'est pas premier, on ajoute 1 jusqu'à ce
+     * qu'on tomber sur un nombre premier.
      *
-     * @return
+     * @return retourne q
      */
     private static int chooseQ() {
         Random random = new Random();
@@ -62,38 +67,30 @@ public class RabinKarp extends FindPattern{
     }
 
     /**
-     *
+     * Construire le dictionnaire de l'alphabet
      */
     private void buildDictionnary() {
         dictionnary = new HashMap<>();
 
-        int length = (int) '9' - (int) ' ' + 1;
-        length += (int) 'Z' - (int) 'A' + 1;
-        length += (int) 'z' - (int) 'a' + 1;
-
-        char[] charArray = new char[length];
         int i = 0;
         // [space..9]
         for (char c = ' '; c <= '9'; c++, i++) {
             dictionnary.put(c, i);
-            charArray[i] = c;
         }
         // [A..Z]
         for (char c = 'A'; c <= 'Z'; c++, i++) {
             dictionnary.put(c, i);
-            charArray[i] = c;
         }
         // [a..z]
         for (char c = 'a'; c <= 'z'; c++, i++) {
             dictionnary.put(c, i);
-            charArray[i] = c;
         }
     }
 
     /**
-     *
-     * @param n
-     * @return
+     * Vérifier si un nombre n est premier ou pas
+     * @param n le nombre à vérifier
+     * @return true si n est premier, false sinon
      */
     private static boolean isPrimeNumber(int n) {
         for (int i = 2; i < Math.sqrt(n); i++) {

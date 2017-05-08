@@ -14,9 +14,10 @@ public class BoyerMoore extends FindPattern{
     private String pattern;
 
     /**
+     * Effectuer les calculs de prétraitement et initialisation des variables
      *
-     * @param text
-     * @param pattern
+     * @param text le texte à explorer
+     * @param pattern le motif recherché
      */
     BoyerMoore(String text, String pattern) {
         super(text, pattern);
@@ -25,7 +26,7 @@ public class BoyerMoore extends FindPattern{
         buildTab1();
         buildTab2();
     }
-
+ 
     void BoyerMooreAlgorithm() {
         int m = pattern.length();
         int t = text.length();
