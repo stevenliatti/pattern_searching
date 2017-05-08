@@ -1,8 +1,14 @@
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Random;
-
-class RabinKarp {
+/**
+ * Classe implémentant l'algorithme de recherche de motifs
+ * selon Rabin-Karp.
+ *
+ * @author Raed Abdennadher
+ * @author Steven Liatti
+ */
+public class RabinKarp {
     private HashMap<Character, Integer> dictionnary;
     private char[] charArray;
     private int q;
@@ -12,6 +18,11 @@ class RabinKarp {
     private String M;
     private int m;
 
+    /**
+     *
+     * @param T
+     * @param M
+     */
     public RabinKarp(String T, String M) {
         buildDictionnary();
         this.T = T;
@@ -22,10 +33,16 @@ class RabinKarp {
         p = hash(M, 0, m);
     }
 
+    /**
+     *
+     */
     public void RabinKarpNoFile() {
         System.out.println(B + " " + q + " " + p);
     }
 
+    /**
+     *
+     */
     public void RabinKarpAlgorithm() {
         int t = T.length();
         int occurences = 0;
@@ -44,6 +61,13 @@ class RabinKarp {
         System.out.println(positions);
     }
 
+    /**
+     *
+     * @param n
+     * @param min
+     * @param max
+     * @return
+     */
     private BigInteger hash(String n, int min, int max) {
         char[] mCharArray = n.toCharArray();
         String s = "";
@@ -53,6 +77,10 @@ class RabinKarp {
         return new BigInteger(s);
     }
 
+    /**
+     *
+     * @return
+     */
     private static int chooseQ() {
         Random random = new Random();
         int q = random.nextInt(100);
@@ -62,6 +90,9 @@ class RabinKarp {
         return q;
     }
 
+    /**
+     *
+     */
     private void buildDictionnary() {
         dictionnary = new HashMap<>();
 
@@ -88,6 +119,11 @@ class RabinKarp {
         }
     }
 
+    /**
+     *
+     * @param n
+     * @return
+     */
     private static boolean isPrimeNumber(int n) {
         for (int i = 2; i < Math.sqrt(n); i++) {
             if (n % i == 0)
