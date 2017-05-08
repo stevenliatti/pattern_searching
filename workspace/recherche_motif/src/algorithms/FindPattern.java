@@ -1,5 +1,6 @@
 package algorithms;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ public abstract class FindPattern {
     protected List<Integer> occurences;
 
     /**
-     * Construit un algorithms.FindPattern à partir d'un texte et d'un motif.
+     * Construit un FindPattern à partir d'un texte et d'un motif.
      *
      * @param text
      * @param pattern
@@ -22,6 +23,7 @@ public abstract class FindPattern {
     public FindPattern(String text, String pattern) {
         this.text = text;
         this.pattern = pattern;
+        this.occurences = new ArrayList<>();
     }
 
     /**
@@ -35,15 +37,6 @@ public abstract class FindPattern {
      * Affiche des résultats intermédiaires demandés.
      */
     public abstract void output();
-
-    /**
-     * Retourne la liste des occurences.
-     *
-     * @return La liste des occurences.
-     */
-    public List<Integer> getOccurences() {
-        return occurences;
-    }
 
     @Override
     public String toString() {

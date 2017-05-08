@@ -10,57 +10,28 @@ import java.util.Random;
  * @author Raed Abdennadher
  * @author Steven Liatti
  */
-public class RabinKarp {
+public class RabinKarp extends FindPattern{
     private HashMap<Character, Integer> dictionnary;
-    private char[] charArray;
     private int q;
     private int B;
     private BigInteger p;
-    private String T;
-    private String M;
     private int m;
 
     /**
+     * Effectuer les calculs de prétraitement et initialisation des variables
      *
-     * @param T
-     * @param M
+     * @param text le texte à explorer
+     * @param pattern le motif recherché
      */
-    public RabinKarp(String T, String M) {
+    public RabinKarp(String text, String pattern) {
+        super(text, pattern);
         buildDictionnary();
-        this.T = T;
-        this.M = M;
+        this.text = text;
+        this.pattern = pattern;
         q = chooseQ();
         B = dictionnary.size();
-        m = M.length();
-        p = hash(M, 0, m);
-    }
-
-    /**
-     *
-     */
-    public void RabinKarpNoFile() {
-        System.out.println(B + " " + q + " " + p);
-    }
-
-    /**
-     *
-     */
-    public void RabinKarpAlgorithm() {
-        int t = T.length();
-        int occurences = 0;
-        String positions = "";
-        p = p.mod(BigInteger.valueOf(q));
-        for (int s = 0; s < t - m + 1; s++) {
-            BigInteger t_s = hash(T, s, s + m);
-            if (p.intValue() == t_s.mod(BigInteger.valueOf(q)).intValue()) {
-                if (T.substring(s, s + m).equals(M)) {
-                    positions += String.valueOf(s + 1) + " ";
-                    occurences++;
-                }
-            }
-        }
-        System.out.println(occurences);
-        System.out.println(positions);
+        m = pattern.length();
+        p = hash(pattern, 0, m);
     }
 
     /**
@@ -102,7 +73,7 @@ public class RabinKarp {
         length += (int) 'Z' - (int) 'A' + 1;
         length += (int) 'z' - (int) 'a' + 1;
 
-        charArray = new char[length];
+        char[] charArray = new char[length];
         int i = 0;
         // [space..9]
         for (char c = ' '; c <= '9'; c++, i++) {
@@ -134,12 +105,22 @@ public class RabinKarp {
         return true;
     }
 
-    /**
-     *
-     */
-    private void printDictionary() {
-        for (int i = 0; i < dictionnary.size(); i++) {
-            System.out.println(charArray[i] + " : " + dictionnary.get(charArray[i]));
+    @Override
+    public void findPattern() {
+        int t = text.length();
+        p = p.mod(BigInteger.valueOf(q));
+        for (int s = 0; s < t - m + 1; s++) {
+            BigInteger t_s = hash(text, s, s + m);
+            if (p.intValue() == t_s.mod(BigInteger.valueOf(q)).intValue()) {
+                if (text.substring(s, s + m).equals(pattern)) {
+                    this.occurences.add(s + 1);
+                }
+            }
         }
+    }
+
+    @Override
+    public void output() {
+        System.out.println(B + " " + q + " " + p);
     }
 }

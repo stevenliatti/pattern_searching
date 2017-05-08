@@ -1,9 +1,6 @@
 package main;
 
-import algorithms.Automata;
-import algorithms.BoyerMoore;
-import algorithms.KMP;
-import algorithms.RabinKarp;
+import algorithms.*;
 import readers.TextFile;
 
 import java.io.*;
@@ -11,26 +8,6 @@ import java.io.*;
 public class Main {
 
     public static void main(String[] args) throws IOException, NumberFormatException {
-        String text = "212121212131212 wwwwww bwwwawwww bonsbonsbonsbonsbonsabonsbonsbons 1111abt1111ab1111abt1111ab111 12121111abt1111ab1212 12w wwwab12 w1111abww1111abwww1111abt1111abwwww bonswbonsbonswbonsbonsbons 12ww1212www121212wwww";
-        String pattern = "bonsbonsbons";
-
-	    System.out.println("Rabin Karp");
-	    RabinKarp rk = new RabinKarp(text, pattern);
-	    rk.RabinKarpNoFile();
-	    rk.RabinKarpAlgorithm();
-
-        System.out.println("\nAutomate :");
-	    Automata robot = new Automata(text, pattern);
-	    robot.output();
-	    robot.findPattern();
-        System.out.println(robot);
-
-        System.out.println("\nKMP :");
-	    KMP kmpTest = new KMP(text, pattern);
-	    kmpTest.output();
-        kmpTest.findPattern();
-        System.out.println(kmpTest);
-
         // Ne pas modifier cette partie
         String fileName = null;
         String motif = null;
@@ -52,93 +29,69 @@ public class Main {
         if (fileName != null) {
             exploredText = TextFile.fileToString(fileName);
         }
+        FindPattern findPattern;
         switch (algo) {
             case 1: //Rabin-Karp
-                RabinKarp rabinKarp = new RabinKarp(exploredText, motif);
-                // Format de sortie -> à générer avec votre code
-                if (fileName == null || exploredText == null) {
+                findPattern = new RabinKarp(exploredText, motif);
+                if (fileName == null) {
                     // Afficher la base, le nombre 1er pour le modulo, le hash du motif
-                    rabinKarp.RabinKarpNoFile();
-//                    System.out.println("26 37 18");
+                    findPattern.output();
                 } else {
                     // Afficher le nombre d'occurences du motif
                     // suivi de la liste des positions de sa 1ere lettre dans le texte
-                    rabinKarp.RabinKarpAlgorithm();
-//                    System.out.println("13"); // nombre d'occurences du motifs
-//                    System.out.println("0 3 46 67 109"); //liste des positions du motif
+                    findPattern.findPattern();
+                    System.out.println(findPattern);
                 }
                 break;
             case 2: //Automate fini
-                // Format de sortie -> à générer avec votre code
-	            Automata automate;
                 if (fileName == null) {
-                	automate = new Automata(motif, motif);
-                	automate.output();
                     // Afficher le tableau de la fonction de transition
                     // P. ex. pour le motif M = "ababaca"
                     //                  a b c
-//                    System.out.println("1 0 0"); // etat 0
-//                    System.out.println("1 2 0"); // etat 1
-//                    System.out.println("3 0 0"); // etat 2
-//                    System.out.println("1 4 0"); // etat 3
-//                    System.out.println("5 0 0"); // etat 4
-//                    System.out.println("1 4 6"); // etat 5
-//                    System.out.println("7 0 0"); // etat 6
-//                    System.out.println("1 2 0"); // etat 7
-
+                    findPattern = new Automata(motif, motif);
+                    findPattern.output();
                 } else {
                     // Afficher le nombre d'occurences du motif
                     // suivi de la liste des positions de sa 1ere lettre dans le texte
-	                automate = new Automata(TextFile.fileToString(fileName), motif);
-	                automate.findPattern();
-                    System.out.println(automate);
-//                    System.out.println("13"); // nombre d'occurences du motifs
-//                    System.out.println("0 3 46 67 109"); //liste des positions du motif
+	                findPattern = new Automata(exploredText, motif);
+	                findPattern.findPattern();
+                    System.out.println(findPattern);
                 }
                 break;
             case 3: //Knut-Morris-Pratt
-                // Format de sortie -> à générer avec votre code
-	            KMP kmp;
                 if (fileName == null) {
                     //Afficher le tableau des prefixes
                     // P. ex. pour le motif M = "ababaca"
                     //                  0 1 2 3 4 5 6           q
                     //                  a b a b a c a         M[q]
-//                    System.out.println("0 0 1 2 3 0 1");  // pi[q]
-	                kmp = new KMP(motif, motif);
-	                kmp.output();
+	                findPattern = new KMP(motif, motif);
+	                findPattern.output();
                 } else {
                     // Afficher le nombre d'occurences du motif
                     // suivi de la liste des positions de sa 1ere lettre dans le texte
-//                    System.out.println("13"); // nombre d'occurences du motifs
-//                    System.out.println("0 3 46 67 109"); //liste des positions du motif
-	                kmp = new KMP(TextFile.fileToString(fileName), motif);
-	                kmp.findPattern();
-                    System.out.println(kmp);
+	                findPattern = new KMP(exploredText, motif);
+	                findPattern.findPattern();
+                    System.out.println(findPattern);
                 }
                 break;
             case 4: //Boyer-Moore
-                BoyerMoore boyerMoore = new BoyerMoore(exploredText, motif);
+                findPattern = new BoyerMoore(exploredText, motif);
                 // Format de sortie -> à générer avec votre code
                 if (fileName == null) {
                     //Afficher les deux tableaux des decalages
                     // P. ex. pour le motif M = "anpanman"
                     // 1er tableau
-                    boyerMoore.printTab1();
                     //                  a n p m *       lettre (selon ordre dans le motif)
-                    System.out.println("1 0 5 2 8"); // decalage
                     // 2eme tableau
                     // partie du motif bonne (depuis la droite):
-                    boyerMoore.printTab2();
                     //            n an man nman anman panman npanman anpanman
                     // decalage:  8  3  6    6    6      6      6       6
-                    System.out.println("8 3 6 6 6 6 6 6"); // decalage
+                    findPattern.output();
                 } else {
                     // Afficher le nombre d'occurences du motif
                     // suivi de la liste des positions de sa 1ere lettre dans le texte
-//                    System.out.println("13"); // nombre d'occurences du motifs
-//                    System.out.println("0 3 46 67 109"); //liste des positions du motif
-                    boyerMoore.BoyerMooreAlgorithm();
+                    findPattern.findPattern();
+                    System.out.println(findPattern);
                 }
                 break;
             default:

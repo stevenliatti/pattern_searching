@@ -8,15 +8,13 @@ package algorithms;
  * @author Steven Liatti
  */
 public class KMP extends FindPattern {
-	private String text;
-	private String pattern;
 	private int arrayPrefix[];
 
 	/**
-	 * Construit un algorithms.KMP en fonction d'un texte et d'un motif.
+	 * Construit un KMP en fonction d'un texte et d'un motif.
 	 *
-	 * @param text
-	 * @param pattern
+	 * @param text Le texte dans lequel le motif sera cherché.
+	 * @param pattern Le motif.
 	 */
 	public KMP(String text, String pattern) {
 		super(text, pattern);
@@ -48,13 +46,16 @@ public class KMP extends FindPattern {
 		}
 	}
 
+	/**
+	 * Cette fonction construit le tableau des préfixes.
+	 */
 	private void buildArrayPrefix() {
 		arrayPrefix = new int[pattern.length() + 1];
 		int j = 1;
 		int k = 0;
-		arrayPrefix[0] = -1;
+		arrayPrefix[0] = 0;
 		while(j < pattern.length()) {
-			if(k == -1 || pattern.charAt(j) == pattern.charAt(k)) {
+			if(k == 0 || pattern.charAt(j) == pattern.charAt(k)) {
 				j++;
 				k++;
 				arrayPrefix[j] = k;
